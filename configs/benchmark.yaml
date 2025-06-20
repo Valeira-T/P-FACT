@@ -1,0 +1,28 @@
+#指定使用第四个GPU进行计算，通过 nvidia-smi 确认可用GPU数量。
+DEVICE: 'cuda:4'
+#随机种子为42，随机种子是用于初始化随机数生成器的值，在机器学习中，很多操作如数据打乱、参数初始化等依赖随机性，设置固定种子可以保证每次运行结果一致。
+RANDOM_SEED: 42   #在机器学习领域，42已成为一个约定俗成的默认种子值
+
+#模型参数
+MODEL:
+  N_LAYERS: 8                #
+  N_HEADS: 8
+  N_EMBD: 256
+  MAX_LEN: 100
+  NUM_PROPS: 0
+  EMBD_PDROP: 0.1
+  RESID_PDROP: 0.1
+  ATTN_PDROP: 0.1
+  VOCAB_SIZE: 94
+
+BENCHMARK:
+  CKPT_PATH: weights/guacamol_nc.pt # (For GuacaMol) weights/guacamol_nc.pt # (For MOSES) weights/moses_nc.pt
+  TEMPERATURE: 1.0
+  BASELINE_MODE: False
+  OUTPUT_JSON: output/benchmark/assessment.json  # (For MOSES) unused
+  CHEMBL_TRAINING_FILE: data/guacamol_v1_train.smiles
+  BATCH_SIZE: 500
+  TOP_K: 
+  N_CPU: 30
+  CONTEXT: C
+  GEN_SMILES_PATH:  # (For MOSES) output/benchmark/out.csv # (For GuacaMol) <leave blank!>
